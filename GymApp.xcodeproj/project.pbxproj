@@ -17,6 +17,11 @@
 		6B116A9C2839309C00E781B0 /* GymAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B116A9B2839309C00E781B0 /* GymAppTests.swift */; };
 		6B116AA62839309C00E781B0 /* GymAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B116AA52839309C00E781B0 /* GymAppUITests.swift */; };
 		6B116AA82839309C00E781B0 /* GymAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B116AA72839309C00E781B0 /* GymAppUITestsLaunchTests.swift */; };
+		6B55A4B8283AE12100FA65ED /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6B55A4B7283AE12100FA65ED /* GoogleService-Info.plist */; };
+		6B55A4BB283AE4DB00FA65ED /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 6B55A4BA283AE4DB00FA65ED /* FirebaseAuth */; };
+		6B55A4BD283AE4DB00FA65ED /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 6B55A4BC283AE4DB00FA65ED /* FirebaseFirestore */; };
+		6B55A4BF283AE4DB00FA65ED /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6B55A4BE283AE4DB00FA65ED /* FirebaseFirestoreSwift */; };
+		6B55A4C1283AE4DB00FA65ED /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 6B55A4C0283AE4DB00FA65ED /* FirebaseStorage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +56,7 @@
 		6B116AA12839309C00E781B0 /* GymAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GymAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B116AA52839309C00E781B0 /* GymAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymAppUITests.swift; sourceTree = "<group>"; };
 		6B116AA72839309C00E781B0 /* GymAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		6B55A4B7283AE12100FA65ED /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +64,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B55A4BB283AE4DB00FA65ED /* FirebaseAuth in Frameworks */,
+				6B55A4C1283AE4DB00FA65ED /* FirebaseStorage in Frameworks */,
+				6B55A4BD283AE4DB00FA65ED /* FirebaseFirestore in Frameworks */,
+				6B55A4BF283AE4DB00FA65ED /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +118,7 @@
 				6B116A8D2839309C00E781B0 /* Assets.xcassets */,
 				6B116A8F2839309C00E781B0 /* LaunchScreen.storyboard */,
 				6B116A922839309C00E781B0 /* Info.plist */,
+				6B55A4B7283AE12100FA65ED /* GoogleService-Info.plist */,
 				6B116A8A2839309A00E781B0 /* GymApp.xcdatamodeld */,
 			);
 			path = GymApp;
@@ -146,6 +157,12 @@
 			dependencies = (
 			);
 			name = GymApp;
+			packageProductDependencies = (
+				6B55A4BA283AE4DB00FA65ED /* FirebaseAuth */,
+				6B55A4BC283AE4DB00FA65ED /* FirebaseFirestore */,
+				6B55A4BE283AE4DB00FA65ED /* FirebaseFirestoreSwift */,
+				6B55A4C0283AE4DB00FA65ED /* FirebaseStorage */,
+			);
 			productName = GymApp;
 			productReference = 6B116A7E2839309A00E781B0 /* GymApp.app */;
 			productType = "com.apple.product-type.application";
@@ -218,6 +235,9 @@
 				Base,
 			);
 			mainGroup = 6B116A752839309A00E781B0;
+			packageReferences = (
+				6B55A4B9283AE4DB00FA65ED /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 6B116A7F2839309A00E781B0 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -235,6 +255,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6B116A912839309C00E781B0 /* LaunchScreen.storyboard in Resources */,
+				6B55A4B8283AE12100FA65ED /* GoogleService-Info.plist in Resources */,
 				6B116A8E2839309C00E781B0 /* Assets.xcassets in Resources */,
 				6B116A892839309A00E781B0 /* Main.storyboard in Resources */,
 			);
@@ -608,6 +629,40 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6B55A4B9283AE4DB00FA65ED /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6B55A4BA283AE4DB00FA65ED /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6B55A4B9283AE4DB00FA65ED /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		6B55A4BC283AE4DB00FA65ED /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6B55A4B9283AE4DB00FA65ED /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		6B55A4BE283AE4DB00FA65ED /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6B55A4B9283AE4DB00FA65ED /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
+		6B55A4C0283AE4DB00FA65ED /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6B55A4B9283AE4DB00FA65ED /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		6B116A8A2839309A00E781B0 /* GymApp.xcdatamodeld */ = {
