@@ -13,9 +13,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var registerButton: MDCButton!
     @IBOutlet weak var loginButton: MDCButton!
     
-
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,8 +24,6 @@ class ViewController: UIViewController {
                         bgColor: UIColor.charcoalColor,
                         title: "Registre-se",
                         txtColor: UIColor.white)
-        
-        
         
     }
 }

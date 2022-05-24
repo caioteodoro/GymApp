@@ -70,48 +70,49 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SOj-kz-MHz" customClass="MDCOutlinedTextField">
-                                <rect key="frame" x="30" y="30" width="354" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="Swo-GE-XBi"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cuI-Sj-ivn" customClass="MDCOutlinedTextField">
-                                <rect key="frame" x="30" y="110" width="354" height="50"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TJH-Mx-coF" customClass="MDCButton">
-                                <rect key="frame" x="30" y="190" width="354" height="50"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Login"/>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pza-1a-PiF">
                                 <rect key="frame" x="30" y="250" width="354" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="6gY-a3-RjF">
+                                <rect key="frame" x="30" y="30" width="354" height="210"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SOj-kz-MHz" customClass="MDCOutlinedTextField">
+                                        <rect key="frame" x="0.0" y="0.0" width="354" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="Swo-GE-XBi"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cuI-Sj-ivn" customClass="MDCOutlinedTextField">
+                                        <rect key="frame" x="0.0" y="80" width="354" height="50"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TJH-Mx-coF" customClass="MDCButton">
+                                        <rect key="frame" x="0.0" y="160" width="354" height="50"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Login"/>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="cuI-Sj-ivn" firstAttribute="height" secondItem="SOj-kz-MHz" secondAttribute="height" id="hmG-tT-Wn3"/>
+                                    <constraint firstItem="TJH-Mx-coF" firstAttribute="height" secondItem="SOj-kz-MHz" secondAttribute="height" id="sAA-nS-XTT"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="dH9-GW-NcT"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Pza-1a-PiF" firstAttribute="top" secondItem="TJH-Mx-coF" secondAttribute="bottom" constant="10" id="5rE-Na-BkP"/>
-                            <constraint firstItem="SOj-kz-MHz" firstAttribute="leading" secondItem="dH9-GW-NcT" secondAttribute="leading" constant="30" id="7hc-h9-dNe"/>
+                            <constraint firstItem="Pza-1a-PiF" firstAttribute="top" secondItem="6gY-a3-RjF" secondAttribute="bottom" constant="10" id="3RT-wh-0dE"/>
                             <constraint firstItem="Pza-1a-PiF" firstAttribute="leading" secondItem="dH9-GW-NcT" secondAttribute="leading" constant="30" id="I08-su-A10"/>
-                            <constraint firstItem="dH9-GW-NcT" firstAttribute="trailing" secondItem="SOj-kz-MHz" secondAttribute="trailing" constant="30" id="Js6-lj-0AY"/>
-                            <constraint firstItem="SOj-kz-MHz" firstAttribute="top" secondItem="dH9-GW-NcT" secondAttribute="top" constant="30" id="NK5-lU-vHg"/>
-                            <constraint firstItem="TJH-Mx-coF" firstAttribute="leading" secondItem="dH9-GW-NcT" secondAttribute="leading" constant="30" id="PAx-X8-A4q"/>
-                            <constraint firstItem="TJH-Mx-coF" firstAttribute="height" secondItem="SOj-kz-MHz" secondAttribute="height" id="Q9u-eJ-tbf"/>
-                            <constraint firstItem="dH9-GW-NcT" firstAttribute="trailing" secondItem="cuI-Sj-ivn" secondAttribute="trailing" constant="30" id="RkG-It-mwS"/>
-                            <constraint firstItem="dH9-GW-NcT" firstAttribute="trailing" secondItem="TJH-Mx-coF" secondAttribute="trailing" constant="30" id="Zx3-Cf-CT8"/>
-                            <constraint firstItem="cuI-Sj-ivn" firstAttribute="height" secondItem="SOj-kz-MHz" secondAttribute="height" id="bEd-DG-GND"/>
-                            <constraint firstItem="cuI-Sj-ivn" firstAttribute="leading" secondItem="dH9-GW-NcT" secondAttribute="leading" constant="30" id="dpg-XR-UDa"/>
+                            <constraint firstItem="6gY-a3-RjF" firstAttribute="top" secondItem="dH9-GW-NcT" secondAttribute="top" constant="30" id="N5x-Id-1PN"/>
+                            <constraint firstItem="6gY-a3-RjF" firstAttribute="leading" secondItem="dH9-GW-NcT" secondAttribute="leading" constant="30" id="RBP-9n-alZ"/>
+                            <constraint firstItem="dH9-GW-NcT" firstAttribute="trailing" secondItem="6gY-a3-RjF" secondAttribute="trailing" constant="30" id="Xtr-FV-D5t"/>
                             <constraint firstItem="dH9-GW-NcT" firstAttribute="trailing" secondItem="Pza-1a-PiF" secondAttribute="trailing" constant="30" id="k1m-bc-v4e"/>
-                            <constraint firstItem="TJH-Mx-coF" firstAttribute="top" secondItem="cuI-Sj-ivn" secondAttribute="bottom" constant="30" id="kVu-rx-TDm"/>
-                            <constraint firstItem="cuI-Sj-ivn" firstAttribute="top" secondItem="SOj-kz-MHz" secondAttribute="bottom" constant="30" id="pMV-7T-ELx"/>
                         </constraints>
                     </view>
                     <connections>
@@ -133,66 +134,61 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iSI-oW-7qg" customClass="MDCOutlinedTextField">
-                                <rect key="frame" x="30" y="30" width="354" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="moT-Z5-8b3"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="G7z-Mo-k2b" customClass="MDCOutlinedTextField">
-                                <rect key="frame" x="30" y="110" width="354" height="50"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mLT-1d-Ghv" customClass="MDCOutlinedTextField">
-                                <rect key="frame" x="30" y="270" width="354" height="50"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qcL-vK-ypy" customClass="MDCOutlinedTextField">
-                                <rect key="frame" x="30" y="190" width="354" height="50"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dr5-K3-6dB" customClass="MDCButton">
-                                <rect key="frame" x="30" y="350" width="354" height="50"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Register"/>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9PS-F3-gHE">
                                 <rect key="frame" x="30" y="410" width="354" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="Soh-7z-xgo">
+                                <rect key="frame" x="30" y="30" width="354" height="370"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iSI-oW-7qg" customClass="MDCOutlinedTextField">
+                                        <rect key="frame" x="0.0" y="0.0" width="354" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="moT-Z5-8b3"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="G7z-Mo-k2b" customClass="MDCOutlinedTextField">
+                                        <rect key="frame" x="0.0" y="80" width="354" height="50"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qcL-vK-ypy" customClass="MDCOutlinedTextField">
+                                        <rect key="frame" x="0.0" y="160" width="354" height="50"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mLT-1d-Ghv" customClass="MDCOutlinedTextField">
+                                        <rect key="frame" x="0.0" y="240" width="354" height="50"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dr5-K3-6dB" customClass="MDCButton">
+                                        <rect key="frame" x="0.0" y="320" width="354" height="50"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Register"/>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Dr5-K3-6dB" firstAttribute="height" secondItem="iSI-oW-7qg" secondAttribute="height" id="3lH-Ya-K2U"/>
+                                    <constraint firstItem="G7z-Mo-k2b" firstAttribute="height" secondItem="iSI-oW-7qg" secondAttribute="height" id="Bby-2p-Jj3"/>
+                                    <constraint firstItem="qcL-vK-ypy" firstAttribute="height" secondItem="iSI-oW-7qg" secondAttribute="height" id="ENy-R0-Oo9"/>
+                                    <constraint firstItem="mLT-1d-Ghv" firstAttribute="height" secondItem="iSI-oW-7qg" secondAttribute="height" id="bAx-L9-lpw"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Qn5-L4-7um"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="G7z-Mo-k2b" firstAttribute="height" secondItem="iSI-oW-7qg" secondAttribute="height" id="7ZQ-aO-l4y"/>
-                            <constraint firstItem="Dr5-K3-6dB" firstAttribute="leading" secondItem="Qn5-L4-7um" secondAttribute="leading" constant="30" id="9lV-Sc-uIq"/>
-                            <constraint firstItem="G7z-Mo-k2b" firstAttribute="leading" secondItem="Qn5-L4-7um" secondAttribute="leading" constant="30" id="CQv-34-EKI"/>
-                            <constraint firstItem="Qn5-L4-7um" firstAttribute="trailing" secondItem="mLT-1d-Ghv" secondAttribute="trailing" constant="30" id="LGO-GM-iBn"/>
-                            <constraint firstItem="mLT-1d-Ghv" firstAttribute="top" secondItem="qcL-vK-ypy" secondAttribute="bottom" constant="30" id="Mp5-ul-35x"/>
-                            <constraint firstItem="qcL-vK-ypy" firstAttribute="leading" secondItem="Qn5-L4-7um" secondAttribute="leading" constant="30" id="NC2-xZ-RhZ"/>
-                            <constraint firstItem="G7z-Mo-k2b" firstAttribute="top" secondItem="iSI-oW-7qg" secondAttribute="bottom" constant="30" id="Ngo-qc-rNI"/>
-                            <constraint firstItem="Qn5-L4-7um" firstAttribute="trailing" secondItem="Dr5-K3-6dB" secondAttribute="trailing" constant="30" id="PZJ-ui-Z7N"/>
-                            <constraint firstItem="9PS-F3-gHE" firstAttribute="top" secondItem="Dr5-K3-6dB" secondAttribute="bottom" constant="10" id="Rad-fZ-asX"/>
-                            <constraint firstItem="Qn5-L4-7um" firstAttribute="trailing" secondItem="G7z-Mo-k2b" secondAttribute="trailing" constant="30" id="W6N-xy-XhQ"/>
-                            <constraint firstItem="Dr5-K3-6dB" firstAttribute="height" secondItem="iSI-oW-7qg" secondAttribute="height" id="ZQo-2c-t1g"/>
-                            <constraint firstItem="qcL-vK-ypy" firstAttribute="height" secondItem="iSI-oW-7qg" secondAttribute="height" id="act-id-n07"/>
-                            <constraint firstItem="Dr5-K3-6dB" firstAttribute="top" secondItem="mLT-1d-Ghv" secondAttribute="bottom" constant="30" id="bs0-nZ-wgt"/>
+                            <constraint firstItem="Soh-7z-xgo" firstAttribute="leading" secondItem="Qn5-L4-7um" secondAttribute="leading" constant="30" id="J7j-rS-iOR"/>
                             <constraint firstItem="Qn5-L4-7um" firstAttribute="trailing" secondItem="9PS-F3-gHE" secondAttribute="trailing" constant="30" id="cCi-KV-I15"/>
                             <constraint firstItem="9PS-F3-gHE" firstAttribute="leading" secondItem="Qn5-L4-7um" secondAttribute="leading" constant="30" id="cDO-ya-pHE"/>
-                            <constraint firstItem="qcL-vK-ypy" firstAttribute="top" secondItem="G7z-Mo-k2b" secondAttribute="bottom" constant="30" id="cuo-2e-wUc"/>
-                            <constraint firstItem="mLT-1d-Ghv" firstAttribute="leading" secondItem="Qn5-L4-7um" secondAttribute="leading" constant="30" id="fMJ-Yn-qct"/>
-                            <constraint firstItem="iSI-oW-7qg" firstAttribute="top" secondItem="Qn5-L4-7um" secondAttribute="top" constant="30" id="n0H-3q-hoz"/>
-                            <constraint firstItem="Qn5-L4-7um" firstAttribute="trailing" secondItem="qcL-vK-ypy" secondAttribute="trailing" constant="30" id="oYr-sn-0dR"/>
-                            <constraint firstItem="mLT-1d-Ghv" firstAttribute="height" secondItem="iSI-oW-7qg" secondAttribute="height" id="slL-eq-Sth"/>
-                            <constraint firstItem="iSI-oW-7qg" firstAttribute="leading" secondItem="Qn5-L4-7um" secondAttribute="leading" constant="30" id="x1M-Kd-oXt"/>
-                            <constraint firstItem="Qn5-L4-7um" firstAttribute="trailing" secondItem="iSI-oW-7qg" secondAttribute="trailing" constant="30" id="zLt-9i-9tx"/>
+                            <constraint firstItem="9PS-F3-gHE" firstAttribute="top" secondItem="Soh-7z-xgo" secondAttribute="bottom" constant="10" id="ekA-SY-zD8"/>
+                            <constraint firstItem="Qn5-L4-7um" firstAttribute="trailing" secondItem="Soh-7z-xgo" secondAttribute="trailing" constant="30" id="fD0-bn-Pwe"/>
+                            <constraint firstItem="Soh-7z-xgo" firstAttribute="top" secondItem="Qn5-L4-7um" secondAttribute="top" constant="30" id="woh-0G-luF"/>
                         </constraints>
                     </view>
                     <connections>

@@ -19,6 +19,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
 
         self.view.backgroundColor = UIColor.creamColor
+        
         customizeButton(button: loginButton,
                         bgColor: UIColor.charcoalColor,
                         title: "Login",
@@ -37,6 +38,7 @@ class LoginViewController: UIViewController {
                                    editingColor: UIColor.tanColor)
         
         errorLabel.alpha = 0
+        
     }
     
 

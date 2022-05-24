@@ -21,6 +21,7 @@ class RegisterViewController: UIViewController {
         super.viewDidLoad()
 
         self.view.backgroundColor = UIColor.creamColor
+        
         customizeButton(button: registerButton,
                         bgColor: UIColor.charcoalColor,
                         title: "Registre-se",
