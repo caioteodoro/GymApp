@@ -69,9 +69,57 @@
                     <view key="view" contentMode="scaleToFill" id="3d7-Ch-h6Z">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SOj-kz-MHz" customClass="MDCOutlinedTextField">
+                                <rect key="frame" x="30" y="30" width="354" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Swo-GE-XBi"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cuI-Sj-ivn" customClass="MDCOutlinedTextField">
+                                <rect key="frame" x="30" y="110" width="354" height="50"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TJH-Mx-coF" customClass="MDCButton">
+                                <rect key="frame" x="30" y="190" width="354" height="50"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Login"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pza-1a-PiF">
+                                <rect key="frame" x="30" y="250" width="354" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="dH9-GW-NcT"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Pza-1a-PiF" firstAttribute="top" secondItem="TJH-Mx-coF" secondAttribute="bottom" constant="10" id="5rE-Na-BkP"/>
+                            <constraint firstItem="SOj-kz-MHz" firstAttribute="leading" secondItem="dH9-GW-NcT" secondAttribute="leading" constant="30" id="7hc-h9-dNe"/>
+                            <constraint firstItem="Pza-1a-PiF" firstAttribute="leading" secondItem="dH9-GW-NcT" secondAttribute="leading" constant="30" id="I08-su-A10"/>
+                            <constraint firstItem="dH9-GW-NcT" firstAttribute="trailing" secondItem="SOj-kz-MHz" secondAttribute="trailing" constant="30" id="Js6-lj-0AY"/>
+                            <constraint firstItem="SOj-kz-MHz" firstAttribute="top" secondItem="dH9-GW-NcT" secondAttribute="top" constant="30" id="NK5-lU-vHg"/>
+                            <constraint firstItem="TJH-Mx-coF" firstAttribute="leading" secondItem="dH9-GW-NcT" secondAttribute="leading" constant="30" id="PAx-X8-A4q"/>
+                            <constraint firstItem="TJH-Mx-coF" firstAttribute="height" secondItem="SOj-kz-MHz" secondAttribute="height" id="Q9u-eJ-tbf"/>
+                            <constraint firstItem="dH9-GW-NcT" firstAttribute="trailing" secondItem="cuI-Sj-ivn" secondAttribute="trailing" constant="30" id="RkG-It-mwS"/>
+                            <constraint firstItem="dH9-GW-NcT" firstAttribute="trailing" secondItem="TJH-Mx-coF" secondAttribute="trailing" constant="30" id="Zx3-Cf-CT8"/>
+                            <constraint firstItem="cuI-Sj-ivn" firstAttribute="height" secondItem="SOj-kz-MHz" secondAttribute="height" id="bEd-DG-GND"/>
+                            <constraint firstItem="cuI-Sj-ivn" firstAttribute="leading" secondItem="dH9-GW-NcT" secondAttribute="leading" constant="30" id="dpg-XR-UDa"/>
+                            <constraint firstItem="dH9-GW-NcT" firstAttribute="trailing" secondItem="Pza-1a-PiF" secondAttribute="trailing" constant="30" id="k1m-bc-v4e"/>
+                            <constraint firstItem="TJH-Mx-coF" firstAttribute="top" secondItem="cuI-Sj-ivn" secondAttribute="bottom" constant="30" id="kVu-rx-TDm"/>
+                            <constraint firstItem="cuI-Sj-ivn" firstAttribute="top" secondItem="SOj-kz-MHz" secondAttribute="bottom" constant="30" id="pMV-7T-ELx"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="emailTextField" destination="SOj-kz-MHz" id="o7i-n5-XI1"/>
+                        <outlet property="errorLabel" destination="Pza-1a-PiF" id="DsT-et-pzJ"/>
+                        <outlet property="loginButton" destination="TJH-Mx-coF" id="CcB-OM-64x"/>
+                        <outlet property="passwordTextField" destination="cuI-Sj-ivn" id="Xl8-il-opV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bJA-RL-hLY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

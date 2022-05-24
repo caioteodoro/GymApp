@@ -16,8 +16,7 @@ func customizeButton(button: MDCButton,
     button.setTitle(title, for: .normal)
     button.setBackgroundColor(bgColor)
     button.setTitleColor(txtColor, for: .normal)
-    button.setTitleColor(txtColor, for: .selected)
-    button.setTitleColor(txtColor, for: .focused)
+    button.setTitleColor(txtColor, for: .highlighted)
 }
 
 func customizeOutlinedTextField(textField: MDCOutlinedTextField,

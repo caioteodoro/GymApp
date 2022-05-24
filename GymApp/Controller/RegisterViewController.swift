@@ -23,7 +23,7 @@ class RegisterViewController: UIViewController {
         self.view.backgroundColor = UIColor.creamColor
         customizeButton(button: registerButton,
                         bgColor: UIColor.charcoalColor,
-                        title: "Register",
+                        title: "Registre-se",
                         txtColor: UIColor.white)
         
         customizeOutlinedTextField(textField: firstNameTextField,
@@ -49,6 +49,8 @@ class RegisterViewController: UIViewController {
                                    placeholder: "********",
                                    normalColor: UIColor.goldColor,
                                    editingColor: UIColor.tanColor)
+        
+        errorLabel.alpha = 0
         
     }
 
