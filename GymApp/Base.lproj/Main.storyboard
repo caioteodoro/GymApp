@@ -15,21 +15,59 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="loginBackground" translatesAutoresizingMaskIntoConstraints="NO" id="BLG-7n-fbI">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lV6-Xr-bjj" customClass="MDCButton">
+                                <rect key="frame" x="50" y="712" width="314" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="VjE-K0-mcz"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Login"/>
+                                <connections>
+                                    <segue destination="R6W-zA-hpm" kind="presentation" id="Tij-Ms-BOD"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="22E-Mi-jS9" customClass="MDCButton">
+                                <rect key="frame" x="50" y="642" width="314" height="50"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Register"/>
+                                <connections>
+                                    <segue destination="DoD-8W-4Wd" kind="presentation" id="s3k-bd-YRl"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="lV6-Xr-bjj" firstAttribute="height" secondItem="22E-Mi-jS9" secondAttribute="height" id="WU3-vb-X60"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="lV6-Xr-bjj" secondAttribute="bottom" constant="100" id="Xbx-Cf-cU1"/>
+                            <constraint firstItem="22E-Mi-jS9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="cOp-vQ-kCr"/>
+                            <constraint firstItem="lV6-Xr-bjj" firstAttribute="top" secondItem="22E-Mi-jS9" secondAttribute="bottom" constant="20" id="exm-PE-uG8"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="22E-Mi-jS9" secondAttribute="trailing" constant="50" id="uYR-es-EnJ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lV6-Xr-bjj" secondAttribute="trailing" constant="50" id="v2N-l6-9bS"/>
+                            <constraint firstItem="lV6-Xr-bjj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="vdJ-Gk-Cp7"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="y3i-Sw-5l1"/>
+                    <connections>
+                        <outlet property="loginButton" destination="lV6-Xr-bjj" id="UTa-bp-tWT"/>
+                        <outlet property="registerButton" destination="22E-Mi-jS9" id="wI7-WB-u6S"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="748" y="62"/>
+            <point key="canvasLocation" x="747.82608695652175" y="61.607142857142854"/>
         </scene>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="Xri-wL-qLb">
             <objects>
-                <viewController id="R6W-zA-hpm" sceneMemberID="viewController">
+                <viewController id="R6W-zA-hpm" customClass="LoginViewController" customModule="GymApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3d7-Ch-h6Z">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="dH9-GW-NcT"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -39,12 +77,12 @@
             </objects>
             <point key="canvasLocation" x="1786" y="388"/>
         </scene>
-        <!--View Controller-->
+        <!--Register View Controller-->
         <scene sceneID="XGj-o0-0Cq">
             <objects>
-                <viewController id="DoD-8W-4Wd" sceneMemberID="viewController">
+                <viewController id="DoD-8W-4Wd" customClass="RegisterViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bh1-35-6oG">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="Qn5-L4-7um"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -54,10 +92,10 @@
             </objects>
             <point key="canvasLocation" x="1788" y="-265"/>
         </scene>
-        <!--View Controller-->
+        <!--Home View Controller-->
         <scene sceneID="weY-Wz-GGz">
             <objects>
-                <viewController id="HIi-tZ-SFI" sceneMemberID="viewController">
+                <viewController id="HIi-tZ-SFI" customClass="HomeViewController" customModule="GymApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mlq-b3-79I">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -88,6 +126,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="loginBackground" width="400" height="266.5"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
