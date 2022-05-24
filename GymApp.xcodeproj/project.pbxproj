@@ -28,6 +28,7 @@
 		6B55A4C6283B3D7400FA65ED /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B55A4C5283B3D7400FA65ED /* LoginViewController.swift */; };
 		6B55A4C8283B3D8200FA65ED /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B55A4C7283B3D8200FA65ED /* HomeViewController.swift */; };
 		6B9E7C15283C79AA00B814B2 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9E7C14283C79AA00B814B2 /* Colors.swift */; };
+		6B9E7C1A283C7DF600B814B2 /* Customization Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9E7C19283C7DF600B814B2 /* Customization Functions.swift */; };
 		871577C02AF40968D85D99DA /* Pods_GymApp_GymAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDC5D11686529F6C8C16CB18 /* Pods_GymApp_GymAppUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +73,7 @@
 		6B55A4C5283B3D7400FA65ED /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		6B55A4C7283B3D8200FA65ED /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		6B9E7C14283C79AA00B814B2 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		6B9E7C19283C7DF600B814B2 /* Customization Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Customization Functions.swift"; sourceTree = "<group>"; };
 		90F62FEB34734B34C1EBFB85 /* Pods-GymAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymAppTests.release.xcconfig"; path = "Target Support Files/Pods-GymAppTests/Pods-GymAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		A52F4DD7C6FA8919DF47C306 /* Pods-GymApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymApp.release.xcconfig"; path = "Target Support Files/Pods-GymApp/Pods-GymApp.release.xcconfig"; sourceTree = "<group>"; };
 		CC9C0B872FA56BA0F271459B /* Pods_GymAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GymAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -146,6 +148,7 @@
 		6B116A802839309A00E781B0 /* GymApp */ = {
 			isa = PBXGroup;
 			children = (
+				6B9E7C18283C7D1200B814B2 /* Model */,
 				6B9E7C16283C7A0700B814B2 /* View */,
 				6B55A4C2283B3D0B00FA65ED /* Controller */,
 				6B116A812839309A00E781B0 /* AppDelegate.swift */,
@@ -192,8 +195,16 @@
 			isa = PBXGroup;
 			children = (
 				6B9E7C14283C79AA00B814B2 /* Colors.swift */,
+				6B9E7C19283C7DF600B814B2 /* Customization Functions.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		6B9E7C18283C7D1200B814B2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		842A5C5875E96C0481673B09 /* Pods */ = {
@@ -459,6 +470,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6B55A4C6283B3D7400FA65ED /* LoginViewController.swift in Sources */,
+				6B9E7C1A283C7DF600B814B2 /* Customization Functions.swift in Sources */,
 				6B9E7C15283C79AA00B814B2 /* Colors.swift in Sources */,
 				6B116A862839309A00E781B0 /* ViewController.swift in Sources */,
 				6B55A4C4283B3D6300FA65ED /* RegisterViewController.swift in Sources */,
