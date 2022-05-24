@@ -7,6 +7,7 @@
 
 import UIKit
 import MaterialComponents
+import FirebaseAuth
 
 class LoginViewController: UIViewController {
 
@@ -41,6 +42,46 @@ class LoginViewController: UIViewController {
         
     }
     
-
-
+    func validateFields() -> String? {
+        
+        if emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            return "Preencha todos os campos."
+        }
+        return nil
+    }
+    
+    func printError (_ message: String) {
+        errorLabel.text = message
+        errorLabel.alpha = 1
+    }
+    
+    func transitionToHomeScreen() {
+        let homeViewController = storyboard?.instantiateViewController(withIdentifier: "HomeVC") as? HomeViewController
+        view.window?.rootViewController = homeViewController
+        view.window?.makeKeyAndVisible()
+    }
+    
+    @IBAction func loginButtonTapped(_ sender: Any) {
+        
+        let error = validateFields()
+        if error != nil {
+            printError(error!)
+        } else {
+            
+            let email = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            Auth.auth().signIn(withEmail: email!, password: password!) { result, err in
+                
+                if err != nil  {
+                    self.printError("Erro ao fazer login." + err!.localizedDescription)
+                } else {
+                    self.transitionToHomeScreen()
+                }
+                
+            }
+            
+        }
+        
+    }
+    
 }
