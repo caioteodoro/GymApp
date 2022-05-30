@@ -12,18 +12,24 @@ import FirebaseAuth
 
 class WorkoutViewController: UIViewController {
 
-    var workoutName = 0
+    var currentWorkout = Treino()
     let db = Firestore.firestore()
     let uid = Auth.auth().currentUser?.uid
     var exercisesNames = [Int]()
     var exercises = [Exercicio]()
     var userDocumentId = ""
     
-    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var addExerciseButton: MDCButton!
     @IBOutlet weak var doneButton: MDCButton!
     @IBOutlet weak var exercisesTableView: UITableView!
     @IBOutlet weak var lastWorkoutLabel: UILabel!
+    @IBOutlet weak var workoutTitleLabel: UILabel!
+    
+    func stringFromDate(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd MMM yyyy HH:mm" //yyyy
+        return formatter.string(from: date)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,27 +37,45 @@ class WorkoutViewController: UIViewController {
         exercisesTableView.delegate = self
         exercisesTableView.dataSource = self
         
+        lastWorkoutLabel.text = "Último treino: " + stringFromDate(currentWorkout.data)
+        workoutTitleLabel.text = currentWorkout.descricao
+        
         customizeButton(button: addExerciseButton,
-                        bgColor: UIColor.tanColor,
+                        bgColor: UIColor.creamColor,
                         title: "Adicionar exercício",
                         txtColor: UIColor.charcoalColor)
         
         customizeButton(button: doneButton,
-                        bgColor: UIColor.tanColor,
+                        bgColor: UIColor.creamColor,
                         title: "Treino concluído",
                         txtColor: UIColor.charcoalColor)
         
         getExercises()
      
     }
-
+    
+    @IBAction func doneButtonPressed(_ sender: Any) {
+        db.collection("users").document(userDocumentId).collection("customWorkouts").whereField("nome", isEqualTo: currentWorkout.nome).getDocuments { snapshot, err in
+            if err != nil {
+                print(err!.localizedDescription)
+            } else if snapshot?.count != 1 {
+                print("Mais de um documento encontrado")
+            } else {
+                let document = snapshot?.documents.first
+                document?.reference.updateData(["data":Date()])
+                self.currentWorkout.data = Date()
+            }
+        }
+        NotificationCenter.default.post(name: NSNotification.Name("UpdateTableViewIdentifier"), object: nil)
+        dismiss(animated: true)
+    }
 }
 
 extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
     
     func getExercises() {
         var rawExercises = [Int]()
-        db.collection("users").document(userDocumentId).collection("customWorkouts").whereField("nome", isEqualTo: workoutName).getDocuments { snapshot, err in
+        db.collection("users").document(userDocumentId).collection("customWorkouts").whereField("nome", isEqualTo: currentWorkout.nome).getDocuments { snapshot, err in
             if err != nil {
                 print(err!.localizedDescription)
             } else {

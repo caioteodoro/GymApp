@@ -64,25 +64,29 @@ class HomeViewController: UIViewController {
             if err != nil {
                 Swift.print(err!.localizedDescription)
             } else {
-                for document in snapshot!.documents {
-                    let documentName = document.get("nome") as! Int
-                    if documentName == self.userWorkouts.count {
-                        let documentDate = document.get("data") as! Timestamp
-                        let documentDescription = document.get("descricao") as! String
-                        self.userWorkouts.append(Treino(nome: documentName,
-                                                        descricao: documentDescription,
-                                                        data: documentDate.dateValue()))
+                if snapshot?.count != self.userWorkouts.count {
+                    for document in snapshot!.documents {
+                        let documentName = document.get("nome") as! Int
+                        if !self.userWorkouts.contains(where: { treino in
+                            treino.nome == documentName
+                        }) {
+                            let documentDate = document.get("data") as! Timestamp
+                            let documentDescription = document.get("descricao") as! String
+                            self.userWorkouts.append(Treino(nome: documentName,
+                                                            descricao: documentDescription,
+                                                            data: documentDate.dateValue()))
+                        }
                     }
                 }
+                self.workoutsTableView.reloadData()
             }
         }
-        self.workoutsTableView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "NewWorkoutVCSegue" {
             if let newWorkoutVC = segue.destination as? NewWorkoutViewController {
-                newWorkoutVC.workoutsCount = userWorkouts.count
+                newWorkoutVC.userWorkouts = self.userWorkouts
             }
         }
     }
@@ -123,14 +127,18 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             if err != nil {
                 print(err!.localizedDescription)
             } else {
+                var rawWorkouts = [Treino]()
                 for document in snapshot!.documents {
                     let documentDate = document.get("data") as! Timestamp
                     let documentDescription = document.get("descricao") as! String
                     let documentName = document.get("nome") as! Int
-                    self.userWorkouts.append(Treino(nome: documentName,
+                    rawWorkouts.append(Treino(nome: documentName,
                                                     descricao: documentDescription,
                                                     data: documentDate.dateValue()))
             }
+                self.userWorkouts = rawWorkouts.sorted { treinoA, treinoB in
+                    treinoA.nome < treinoB.nome
+                }
                 self.workoutsTableView.reloadData()
             }
         }
@@ -144,7 +152,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "WorkoutCell", for: indexPath) as? CustomCell else { fatalError() }
         
         cell.titleLabel.text = userWorkouts[indexPath.row].descricao
-        cell.descriptionLabel.text = "Última atualização: " + stringFromDate(userWorkouts[indexPath.row].data)
+        cell.descriptionLabel.text = "Último treino: " + stringFromDate(userWorkouts[indexPath.row].data)
         let iconView = UIImage(named: "exercise-icon")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         iconView?.withTintColor(UIColor.charcoalColor)
         cell.icon.image = iconView
@@ -156,16 +164,18 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         if editingStyle == .delete {
             userWorkouts.remove(at: indexPath.row)
             workoutsTableView.deleteRows(at: [indexPath], with: .fade)
-            db.collection("customWorkouts").whereField("userID", isEqualTo: uid!).getDocuments { snapshot, err in
+            let localWorkoutName = userWorkouts[indexPath.row - 1].nome
+            db.collection("users").document(userDocumentId).collection("customWorkouts").whereField("nome", isEqualTo: localWorkoutName).getDocuments { snapshot, err in
                 if err != nil {
                     print(err!.localizedDescription)
+                } else if snapshot!.count > 1 {
+                    print("Mais de um documento encontrado.")
                 } else {
-                    for document in snapshot!.documents {
-                        let documentName = document.get("nome") as! Int
-                        let documentID = document.documentID
-                        if documentName == indexPath.row {
-                            self.db.collection("customWorkouts").document(documentID).delete()
-                        }
+                    let document = snapshot!.documents.first
+                    let documentName = document!.get("nome") as! Int
+                    let documentID = document!.documentID
+                    if documentName == localWorkoutName {
+                        self.db.collection("users").document(self.userDocumentId).collection("customWorkouts").document(documentID).delete()
                     }
                 }
             }
@@ -174,8 +184,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func openWorkoutVC(_ indexPathRow: Int) {
         let workoutVC = (storyboard?.instantiateViewController(withIdentifier: "WorkoutVC"))! as! WorkoutViewController
-        workoutVC.workoutName = indexPathRow
         workoutVC.userDocumentId = self.userDocumentId
+        workoutVC.currentWorkout = self.userWorkouts[indexPathRow]
         self.present(workoutVC, animated: true, completion: nil)
     }
     

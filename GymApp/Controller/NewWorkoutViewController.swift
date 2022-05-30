@@ -18,17 +18,15 @@ class NewWorkoutViewController: UIViewController {
     @IBOutlet weak var descriptionTextField: MDCFilledTextField!
     @IBOutlet weak var errorLabel: UILabel!
     
-    var rawExercises = [Exercicio]()
-    var exercises = [Exercicio]()
+    var allExercises = [Exercicio]()
     var selectedExercises = [Int]()
-    var workoutsCount = 0
+    var userWorkouts = [Treino]()
     let db = Firestore.firestore()
     let uid = Auth.auth().currentUser?.uid
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(workoutsCount)
         getExercises()
         
         workoutsTableView.dataSource = self
@@ -70,12 +68,17 @@ class NewWorkoutViewController: UIViewController {
                 } else {
                     for document in snapshot!.documents {
                         let docRef = document.documentID
+                        var currentName = 0
+                        if !self.userWorkouts.isEmpty {
+                            currentName = self.userWorkouts.last!.nome + 1
+                        }
+
                         self.db.collection("users").document(docRef).collection("customWorkouts").addDocument(data: ["uid":self.uid ?? "",
-                                                                                                                     "nome": self.workoutsCount,
-                                                                               "descricao":self.descriptionTextField.text ?? "",
-                                                                               "data":Date(),
-                                                                               "exercicios":self.selectedExercises
-                                                                              ]) { err in
+                                                "nome": currentName,
+                                                "descricao":self.descriptionTextField.text ?? "",
+                                                "data":Date(),
+                                                "exercicios":self.selectedExercises
+                                                ]) { err in
                                 if err != nil { print(err!.localizedDescription) }
                         }
                     }
@@ -95,15 +98,16 @@ extension NewWorkoutViewController: UITableViewDelegate, UITableViewDataSource {
             if error != nil {
                 print("Documentos não encontrados")
             } else {
+                var rawExercises = [Exercicio]()
                 for document in snapshot!.documents {
                     let documentName = document.get("nome") as! Int
                     let documentImage = URL(string: document.get("imagem") as! String)
                     let documentDescription = document.get("obsevacoes") as! String
-                    self.rawExercises.append(Exercicio(nome: documentName,
+                    rawExercises.append(Exercicio(nome: documentName,
                                                     imagem: documentImage!,
                                                     observacoes: documentDescription))
                 }
-                self.exercises = self.rawExercises.sorted { exerciseA, exerciseB in
+                self.allExercises = rawExercises.sorted { exerciseA, exerciseB in
                     exerciseA.nome < exerciseB.nome
                 }
                 self.workoutsTableView.reloadData()
@@ -112,17 +116,17 @@ extension NewWorkoutViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return exercises.count
+        return allExercises.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ExerciseCell", for: indexPath) as? CustomCell else { fatalError() }
         
-        cell.titleLabel.text = String(exercises[indexPath.row].nome)
-        cell.descriptionLabel.text = exercises[indexPath.row].observacoes
+        cell.titleLabel.text = String(allExercises[indexPath.row].nome)
+        cell.descriptionLabel.text = allExercises[indexPath.row].observacoes
         
         let iconView = UIImageView()
-        iconView.sd_setImage(with: exercises[indexPath.row].imagem)
+        iconView.sd_setImage(with: allExercises[indexPath.row].imagem)
         cell.icon.image = iconView.image
 
         return cell

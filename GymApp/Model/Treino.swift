@@ -9,12 +9,19 @@ import Foundation
 
 class Treino {
     let nome: Int
-    let descricao: String
-    let data: Date
+    var descricao: String
+    var data: Date
     
     init(nome: Int, descricao: String, data: Date){
         self.nome = nome
         self.descricao = descricao
         self.data = data
     }
+    
+    init(){
+        self.nome = 0
+        self.descricao = ""
+        self.data = Date()
+    }
+    
 }
