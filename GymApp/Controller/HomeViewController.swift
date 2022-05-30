@@ -14,7 +14,7 @@ import SwiftUI
 class HomeViewController: UIViewController {
     
     @IBOutlet weak var newWorkoutButton: MDCButton!
-    @IBOutlet weak var workoutsCollectionView: UICollectionView!
+    @IBOutlet weak var workoutsTableView: UITableView!
     
     func setTitleToName() {
         let db = Firestore.firestore()
@@ -44,44 +44,33 @@ class HomeViewController: UIViewController {
         
         setTitleToName()
         
-        workoutsCollectionView.delegate = self
-        workoutsCollectionView.dataSource = self
+        workoutsTableView.delegate = self
+        workoutsTableView.dataSource = self
 
     }
 
 }
 
-extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WorkoutCell", for: indexPath) as? MDCSelfSizingStereoCell else { fatalError() }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "WorkoutCell", for: indexPath) as? CustomCell else { fatalError() }
         
         cell.titleLabel.text = "Treino 1"
-        cell.detailLabel.text = "Membros superiores"
+        cell.descriptionLabel.text = "Membros superiores"
         let iconView = UIImage(named: "exercise-icon")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         iconView?.withTintColor(UIColor.charcoalColor)
-        cell.leadingImageView.image = iconView
+        cell.icon.image = iconView
 
-        
         return cell
     }
     
-}
-
-
-
-extension HomeViewController: UICollectionViewDelegateFlowLayout {
-        
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (UIScreen.main.bounds.width), height: 88)
-    }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 5
-    }
-
 }
+
+
+
