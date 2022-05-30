@@ -18,8 +18,6 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.view.backgroundColor = UIColor.creamColor
         
         customizeButton(button: loginButton,
                         bgColor: UIColor.charcoalColor,
@@ -56,8 +54,8 @@ class LoginViewController: UIViewController {
     }
     
     func transitionToHomeScreen() {
-        let homeViewController = storyboard?.instantiateViewController(withIdentifier: "HomeVC") as? HomeViewController
-        view.window?.rootViewController = homeViewController
+        let homeNavigationController = storyboard?.instantiateViewController(withIdentifier: "HomeNC") as? UINavigationController
+        view.window?.rootViewController = homeNavigationController
         view.window?.makeKeyAndVisible()
     }
     

@@ -23,8 +23,6 @@ class RegisterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor.creamColor
-        
         customizeButton(button: registerButton,
                         bgColor: UIColor.charcoalColor,
                         title: "Registre-se",
@@ -53,6 +51,8 @@ class RegisterViewController: UIViewController {
                                    placeholder: "********",
                                    normalColor: UIColor.goldColor,
                                    editingColor: UIColor.tanColor)
+        passwordTextField.leadingAssistiveLabel.text = "Com 8 caracteres, deve conter letras e caracteres especiais"
+        
         
         errorLabel.alpha = 0
         
@@ -84,8 +84,8 @@ class RegisterViewController: UIViewController {
     }
     
     func transitionToHomeScreen() {
-        let homeViewController = storyboard?.instantiateViewController(withIdentifier: "HomeVC") as? HomeViewController
-        view.window?.rootViewController = homeViewController
+        let homeNavigationController = storyboard?.instantiateViewController(withIdentifier: "HomeNC") as? UINavigationController
+        view.window?.rootViewController = homeNavigationController
         view.window?.makeKeyAndVisible()
     }
     

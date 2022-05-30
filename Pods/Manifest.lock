@@ -22,6 +22,15 @@ PODS:
     - MaterialComponents/Availability
     - MaterialComponents/private/Color
     - MaterialComponents/private/Math
+  - MaterialComponents/List (124.2.0):
+    - MaterialComponents/Elevation
+    - MaterialComponents/Ink
+    - MaterialComponents/private/Math
+    - MaterialComponents/Ripple
+    - MaterialComponents/ShadowElevations
+    - MaterialComponents/ShadowLayer
+    - MaterialComponents/Typography
+    - MDFInternationalization
   - MaterialComponents/private/Application (124.2.0)
   - MaterialComponents/private/Color (124.2.0):
     - MaterialComponents/Availability
@@ -105,6 +114,7 @@ PODS:
 
 DEPENDENCIES:
   - MaterialComponents/Buttons
+  - MaterialComponents/List
   - "MaterialComponents/TextControls+FilledTextAreas"
   - "MaterialComponents/TextControls+FilledTextFields"
   - "MaterialComponents/TextControls+OutlinedTextAreas"
@@ -121,6 +131,6 @@ SPEC CHECKSUMS:
   MDFInternationalization: d697c55307816222a55685c4ccb1044ffb030c12
   MDFTextAccessibility: f4bb4cc2194286651b59a215fdeaa0e05dc90ba5
 
-PODFILE CHECKSUM: 6cbcef8b48c70382151e77233b74f6a1481a1daa
+PODFILE CHECKSUM: 309e22c55f5c321bf4f387bcecd98c24f6984936
 
 COCOAPODS: 1.11.3

@@ -12,6 +12,7 @@ pod 'MaterialComponents/TextControls+FilledTextAreas'
 pod 'MaterialComponents/TextControls+FilledTextFields'
 pod 'MaterialComponents/TextControls+OutlinedTextAreas'
 pod 'MaterialComponents/TextControls+OutlinedTextFields'
+pod 'MaterialComponents/List'
 
   target 'GymAppTests' do
     inherit! :search_paths
