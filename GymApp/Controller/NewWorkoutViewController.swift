@@ -21,12 +21,14 @@ class NewWorkoutViewController: UIViewController {
     var rawExercises = [Exercicio]()
     var exercises = [Exercicio]()
     var selectedExercises = [Int]()
+    var workoutsCount = 0
     let db = Firestore.firestore()
-    let currentUID = Auth.auth().currentUser?.uid
+    let uid = Auth.auth().currentUser?.uid
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print(workoutsCount)
         getExercises()
         
         workoutsTableView.dataSource = self
@@ -61,25 +63,28 @@ class NewWorkoutViewController: UIViewController {
         } else if selectedExercises.isEmpty {
             printError("Selecione ao menos um exercício")
         } else {
-            db.collection("customWorkouts").whereField("userID", isEqualTo: currentUID!).getDocuments { snapshot, err in
-                let userWorkoutsCount = snapshot?.count
-                self.db.collection("customWorkouts").addDocument(data: ["userID":self.currentUID ?? "",
-                                                                   "nome": userWorkoutsCount ?? 0,
-                                                                   "descricao":self.descriptionTextField.text ?? "",
-                                                                   "data":Date(),
-                                                                   "exercicios":self.selectedExercises
-                                                                  ]) { err in
-                    if err != nil {
-                        print(err!.localizedDescription)
+            
+            db.collection("users").whereField("uid", isEqualTo: uid!).getDocuments { snapshot, err in
+                if err != nil {
+                    print(err!.localizedDescription)
+                } else {
+                    for document in snapshot!.documents {
+                        let docRef = document.documentID
+                        self.db.collection("users").document(docRef).collection("customWorkouts").addDocument(data: ["uid":self.uid ?? "",
+                                                                                                                     "nome": self.workoutsCount,
+                                                                               "descricao":self.descriptionTextField.text ?? "",
+                                                                               "data":Date(),
+                                                                               "exercicios":self.selectedExercises
+                                                                              ]) { err in
+                                if err != nil { print(err!.localizedDescription) }
+                        }
                     }
                 }
             }
+        }
             NotificationCenter.default.post(name: NSNotification.Name("UpdateTableViewIdentifier"), object: nil)
             self.dismiss(animated: true)
-        }
-        
     }
-
 }
 
 extension NewWorkoutViewController: UITableViewDelegate, UITableViewDataSource {
@@ -111,7 +116,7 @@ extension NewWorkoutViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "WorkoutCell", for: indexPath) as? CustomCell else { fatalError() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ExerciseCell", for: indexPath) as? CustomCell else { fatalError() }
         
         cell.titleLabel.text = String(exercises[indexPath.row].nome)
         cell.descriptionLabel.text = exercises[indexPath.row].observacoes

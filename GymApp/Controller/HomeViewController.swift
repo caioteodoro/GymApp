@@ -20,6 +20,7 @@ class HomeViewController: UIViewController {
     
     let db = Firestore.firestore()
     let uid = Auth.auth().currentUser?.uid
+    var userDocumentId = ""
     var userWorkouts = [Treino]()
     
     func setTitleToName() {
@@ -42,21 +43,29 @@ class HomeViewController: UIViewController {
         return formatter.string(from: date)
     }
     
-    @IBAction func refresh(_ sender: Any) {
-        
-        updateTableView()
+    func getUserdocumentId () {
+        var temporaryArray = [String]()
+        db.collection("users").whereField("uid", isEqualTo: uid!).getDocuments { snapshot, err in
+            if err != nil {
+                print(err!.localizedDescription)
+            } else {
+                for document in snapshot!.documents {
+                    temporaryArray.append(document.documentID)
+                    self.userDocumentId = temporaryArray[0]
+                    self.getWorkouts()
+                }
+            }
+        }
     }
-    
     
     @objc func updateTableView() {
         
-        db.collection("customWorkouts").whereField("userID", isEqualTo: uid!).getDocuments { snapshot, error in
-            if error != nil {
-                print(error!.localizedDescription)
+        db.collection("users").document(userDocumentId).collection("customWorkouts").getDocuments { snapshot, err in
+            if err != nil {
+                Swift.print(err!.localizedDescription)
             } else {
                 for document in snapshot!.documents {
                     let documentName = document.get("nome") as! Int
-                    print("Nome: " + String(documentName))
                     if documentName == self.userWorkouts.count {
                         let documentDate = document.get("data") as! Timestamp
                         let documentDescription = document.get("descricao") as! String
@@ -67,8 +76,19 @@ class HomeViewController: UIViewController {
                 }
             }
         }
-        print("Array: " + String(userWorkouts.count))
         self.workoutsTableView.reloadData()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "NewWorkoutVCSegue" {
+            if let newWorkoutVC = segue.destination as? NewWorkoutViewController {
+                newWorkoutVC.workoutsCount = userWorkouts.count
+            }
+        }
+    }
+    
+    @IBAction func refresh(_ sender: Any) {
+        updateTableView()
     }
     
     override func viewDidLoad() {
@@ -83,12 +103,11 @@ class HomeViewController: UIViewController {
                         title: "Atualizar",
                         txtColor: UIColor.white)
         
-        setTitleToName()
-        
         workoutsTableView.delegate = self
         workoutsTableView.dataSource = self
         
-        getWorkouts()
+        setTitleToName()
+        getUserdocumentId()
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateTableView), name: NSNotification.Name("UpdateTableViewIdentifier"), object: nil)
 
@@ -99,10 +118,10 @@ class HomeViewController: UIViewController {
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func getWorkouts() {
-        
-        db.collection("customWorkouts").whereField("userID", isEqualTo: uid!).getDocuments { snapshot, error in
-            if error != nil {
-                print(error!.localizedDescription)
+
+        db.collection("users").document(userDocumentId).collection("customWorkouts").getDocuments { snapshot, err in
+            if err != nil {
+                print(err!.localizedDescription)
             } else {
                 for document in snapshot!.documents {
                     let documentDate = document.get("data") as! Timestamp
@@ -117,7 +136,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
 
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return userWorkouts.count
     }
@@ -154,9 +172,19 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    func openWorkoutVC(_ indexPathRow: Int) {
+        let workoutVC = (storyboard?.instantiateViewController(withIdentifier: "WorkoutVC"))! as! WorkoutViewController
+        workoutVC.workoutName = indexPathRow
+        workoutVC.userDocumentId = self.userDocumentId
+        self.present(workoutVC, animated: true, completion: nil)
+    }
+    
     func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        let editWorkoutVC = (storyboard?.instantiateViewController(withIdentifier: "EditWorkoutVC"))! as UIViewController
-        self.present(editWorkoutVC, animated: true, completion: nil)
+        openWorkoutVC(indexPath.row)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        openWorkoutVC(indexPath.row)
     }
     
 }
