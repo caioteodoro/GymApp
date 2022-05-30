@@ -14,7 +14,7 @@ import FirebaseAuth
 class NewWorkoutViewController: UIViewController {
     
     @IBOutlet weak var doneButton: MDCButton!
-    @IBOutlet weak var workoutsTableView: UITableView!
+    @IBOutlet weak var exercisesTableView: UITableView!
     @IBOutlet weak var descriptionTextField: MDCFilledTextField!
     @IBOutlet weak var errorLabel: UILabel!
     
@@ -29,16 +29,16 @@ class NewWorkoutViewController: UIViewController {
         
         getExercises()
         
-        workoutsTableView.dataSource = self
-        workoutsTableView.delegate = self
-        workoutsTableView.allowsMultipleSelection = true
+        exercisesTableView.dataSource = self
+        exercisesTableView.delegate = self
+        exercisesTableView.allowsMultipleSelection = true
         
         errorLabel.alpha = 0
         
         customizeButton(button: doneButton,
                         bgColor: UIColor.tanColor,
                         title: "Concluído",
-                        txtColor: UIColor.charcoalColor)
+                        txtColor: UIColor.creamColor)
         
         customizeFilledTextField(textField: descriptionTextField,
                                  label: "Descrição",
@@ -84,9 +84,11 @@ class NewWorkoutViewController: UIViewController {
                     }
                 }
             }
-        }
+            
             NotificationCenter.default.post(name: NSNotification.Name("UpdateTableViewIdentifier"), object: nil)
             self.dismiss(animated: true)
+            
+        }
     }
 }
 
@@ -110,7 +112,7 @@ extension NewWorkoutViewController: UITableViewDelegate, UITableViewDataSource {
                 self.allExercises = rawExercises.sorted { exerciseA, exerciseB in
                     exerciseA.nome < exerciseB.nome
                 }
-                self.workoutsTableView.reloadData()
+                self.exercisesTableView.reloadData()
             }
         }
     }

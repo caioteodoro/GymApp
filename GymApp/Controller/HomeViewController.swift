@@ -162,9 +162,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            userWorkouts.remove(at: indexPath.row)
-            workoutsTableView.deleteRows(at: [indexPath], with: .fade)
-            let localWorkoutName = userWorkouts[indexPath.row - 1].nome
+            
+            let localWorkoutName = userWorkouts[indexPath.row].nome
             db.collection("users").document(userDocumentId).collection("customWorkouts").whereField("nome", isEqualTo: localWorkoutName).getDocuments { snapshot, err in
                 if err != nil {
                     print(err!.localizedDescription)
@@ -179,6 +178,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                     }
                 }
             }
+            self.userWorkouts.remove(at: indexPath.row)
+            self.workoutsTableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
     

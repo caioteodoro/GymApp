@@ -14,7 +14,6 @@ class WorkoutViewController: UIViewController {
 
     var currentWorkout = Treino()
     let db = Firestore.firestore()
-    let uid = Auth.auth().currentUser?.uid
     var exercisesNames = [Int]()
     var exercises = [Exercicio]()
     var userDocumentId = ""
@@ -29,6 +28,14 @@ class WorkoutViewController: UIViewController {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd MMM yyyy HH:mm" //yyyy
         return formatter.string(from: date)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "AddExerciseVCSegue" {
+            if let addExerciseVC = segue.destination as? AddExerciseViewController {
+                addExerciseVC.currentExercises = self.exercises
+            }
+        }
     }
     
     override func viewDidLoad() {
