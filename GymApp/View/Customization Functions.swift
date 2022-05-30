@@ -7,6 +7,7 @@
 
 import Foundation
 import MaterialComponents
+import UIKit
 
 func customizeButton(button: MDCButton,
                      bgColor: UIColor,
@@ -32,4 +33,22 @@ func customizeOutlinedTextField(textField: MDCOutlinedTextField,
     textField.setOutlineColor(editingColor, for: .editing)
     textField.setFloatingLabelColor(normalColor, for: .normal)
     textField.setFloatingLabelColor(editingColor, for: .editing)
+}
+
+func customizeFilledTextField(textField: MDCFilledTextField,
+                        label: String,
+                        placeholder: String,
+                        underlineColorNormal: UIColor,
+                        underlineColorEditing: UIColor,
+                        backgroundColorNormal: UIColor,
+                        backgroundColorEditing: UIColor){
+    let textField = textField
+    textField.label.text = label
+    textField.placeholder = placeholder
+    textField.sizeToFit()
+    textField.setUnderlineColor(underlineColorNormal, for: .normal)
+    textField.setUnderlineColor(underlineColorEditing, for: .editing)
+    textField.setFilledBackgroundColor(backgroundColorNormal, for: .normal)
+    textField.setFilledBackgroundColor(backgroundColorEditing, for: .editing)
+    textField.setFloatingLabelColor(underlineColorEditing, for: .normal)
 }

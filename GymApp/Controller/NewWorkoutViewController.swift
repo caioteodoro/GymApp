@@ -9,67 +9,81 @@ import UIKit
 import FirebaseFirestore
 import MaterialComponents
 import SwiftUI
-import FirebaseFirestoreSwift
+import FirebaseAuth
 
 class NewWorkoutViewController: UIViewController {
     
     @IBOutlet weak var doneButton: MDCButton!
     @IBOutlet weak var workoutsTableView: UITableView!
+    @IBOutlet weak var descriptionTextField: MDCFilledTextField!
+    @IBOutlet weak var errorLabel: UILabel!
     
-//    private var service: ExercisesService?
-//    private var exercises = [Exercicio]() {
-//        didSet {
-//            DispatchQueue.main.async {
-//                self.workoutsTableView.reloadData()
-//            }
-//        }
-//    }
-//    var allExercises = [Exercicio]() {
-//        didSet {
-//            DispatchQueue.main.async {
-//                self.exercises = self.allExercises
-//            }
-//        }
-//    }
-//
-//    func loadData() {
-//        service = ExercisesService()
-//        service?.get(collectionID: "exercises", handler: { exercises in
-//            self.allExercises = exercises
-//        })
-//    }
-    
+    var rawExercises = [Exercicio]()
     var exercises = [Exercicio]()
+    var selectedExercises = [Int]()
+    let db = Firestore.firestore()
+    let currentUID = Auth.auth().currentUser?.uid
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         getExercises()
-        //loadData()
         
         workoutsTableView.dataSource = self
         workoutsTableView.delegate = self
+        workoutsTableView.allowsMultipleSelection = true
+        
+        errorLabel.alpha = 0
         
         customizeButton(button: doneButton,
-                        bgColor: UIColor.creamColor,
+                        bgColor: UIColor.tanColor,
                         title: "Concluído",
                         txtColor: UIColor.charcoalColor)
         
-        
+        customizeFilledTextField(textField: descriptionTextField,
+                                 label: "Descrição",
+                                 placeholder: "Treino A",
+                                 underlineColorNormal: UIColor.goldColor,
+                                 underlineColorEditing: UIColor.tanColor,
+                                 backgroundColorNormal: UIColor.goldColor,
+                                 backgroundColorEditing: UIColor.tanColor)
+    }
+    
+    func printError (_ message: String) {
+        errorLabel.text = message
+        errorLabel.alpha = 1
     }
     
     @IBAction func doneButtonPressed(_ sender: Any) {
         
+        if descriptionTextField.text == "" {
+            printError("Preencha a descrição")
+        } else if selectedExercises.isEmpty {
+            printError("Selecione ao menos um exercício")
+        } else {
+            db.collection("customWorkouts").whereField("userID", isEqualTo: currentUID!).getDocuments { snapshot, err in
+                let userWorkoutsCount = snapshot?.count
+                self.db.collection("customWorkouts").addDocument(data: ["userID":self.currentUID ?? "",
+                                                                   "nome": userWorkoutsCount ?? 0,
+                                                                   "descricao":self.descriptionTextField.text ?? "",
+                                                                   "data":Date(),
+                                                                   "exercicios":self.selectedExercises
+                                                                  ]) { err in
+                    if err != nil {
+                        print(err!.localizedDescription)
+                    }
+                }
+            }
+            self.dismiss(animated: true)
+        }
+        
     }
-    
 
 }
 
 extension NewWorkoutViewController: UITableViewDelegate, UITableViewDataSource {
 
-    
     func getExercises() {
-        let db = Firestore.firestore()
         
         db.collection("exercises").getDocuments { snapshot, error in
             if error != nil {
@@ -77,11 +91,14 @@ extension NewWorkoutViewController: UITableViewDelegate, UITableViewDataSource {
             } else {
                 for document in snapshot!.documents {
                     let documentName = document.get("nome") as! Int
-                    let documentImage = document.get("imagem") as! String
+                    let documentImage = URL(string: document.get("imagem") as! String)
                     let documentDescription = document.get("obsevacoes") as! String
-                    self.exercises.append(Exercicio(nome: documentName,
-                                                    imagem: documentImage,
+                    self.rawExercises.append(Exercicio(nome: documentName,
+                                                    imagem: documentImage!,
                                                     observacoes: documentDescription))
+                }
+                self.exercises = self.rawExercises.sorted { exerciseA, exerciseB in
+                    exerciseA.nome < exerciseB.nome
                 }
                 self.workoutsTableView.reloadData()
             }
@@ -95,13 +112,25 @@ extension NewWorkoutViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "WorkoutCell", for: indexPath) as? CustomCell else { fatalError() }
         
-        cell.titleLabel.text = "Treino 1"
-        cell.descriptionLabel.text = "Membros superiores"
-        let iconView = UIImage(named: "exercise-icon")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
-        iconView?.withTintColor(UIColor.creamColor)
-        cell.icon.image = iconView
+        cell.titleLabel.text = String(exercises[indexPath.row].nome)
+        cell.descriptionLabel.text = exercises[indexPath.row].observacoes
+        
+        let iconView = UIImageView()
+        iconView.sd_setImage(with: exercises[indexPath.row].imagem)
+        cell.icon.image = iconView.image
 
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        let exerciseName = indexPath.row + 1
+        let exerciseIndex = selectedExercises.firstIndex(of: exerciseName)!
+        selectedExercises.remove(at: exerciseIndex)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let exerciseName = indexPath.row + 1
+        selectedExercises.append(exerciseName)
     }
     
     

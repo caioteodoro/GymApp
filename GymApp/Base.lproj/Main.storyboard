@@ -330,21 +330,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quais exercícios gostaria de adicionar?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rX1-lp-WZ6">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Defina os exercícios e uma descrição para seu novo treino" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rX1-lp-WZ6">
                                 <rect key="frame" x="30" y="30" width="354" height="57.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                 <color key="textColor" name="Cream"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="NZ6-L4-dqb">
-                                <rect key="frame" x="0.0" y="117.5" width="414" height="594.5"/>
+                                <rect key="frame" x="0.0" y="197.5" width="414" height="487.5"/>
                                 <color key="backgroundColor" name="Charcoal"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="WorkoutCell" id="Hwa-Cr-XA7" customClass="CustomCell" customModule="GymApp" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="WorkoutCell" id="Hwa-Cr-XA7" customClass="CustomCell" customModule="GymApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="74.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Hwa-Cr-XA7" id="FQQ-cP-htU">
-                                            <rect key="frame" x="0.0" y="0.0" width="357" height="74.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="74.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Dt7-mi-rZg">
@@ -391,7 +391,7 @@
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TG5-Vj-iuN" customClass="MDCButton">
-                                <rect key="frame" x="50" y="742" width="314" height="50"/>
+                                <rect key="frame" x="50" y="715" width="314" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Cxi-Dt-yOO"/>
                                 </constraints>
@@ -401,25 +401,47 @@
                                     <action selector="doneButtonPressed:" destination="SlS-rk-5qT" eventType="touchUpInside" id="I6I-JV-1MT"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SJU-sf-f4q" customClass="MDCFilledTextField">
+                                <rect key="frame" x="30" y="117.5" width="354" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="zBb-BG-cmG"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="muy-DU-D7t">
+                                <rect key="frame" x="30" y="775" width="354" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="kPb-4a-j29"/>
                         <color key="backgroundColor" name="Charcoal"/>
                         <constraints>
                             <constraint firstItem="rX1-lp-WZ6" firstAttribute="top" secondItem="kPb-4a-j29" secondAttribute="top" constant="30" id="30k-VK-DwP"/>
+                            <constraint firstItem="NZ6-L4-dqb" firstAttribute="top" secondItem="SJU-sf-f4q" secondAttribute="bottom" constant="30" id="7DW-Dc-tdG"/>
+                            <constraint firstItem="SJU-sf-f4q" firstAttribute="top" secondItem="rX1-lp-WZ6" secondAttribute="bottom" constant="30" id="7bm-kk-ioy"/>
+                            <constraint firstItem="SJU-sf-f4q" firstAttribute="leading" secondItem="kPb-4a-j29" secondAttribute="leading" constant="30" id="Agt-Db-SAg"/>
                             <constraint firstItem="TG5-Vj-iuN" firstAttribute="top" secondItem="NZ6-L4-dqb" secondAttribute="bottom" constant="30" id="CdO-pD-7hR"/>
-                            <constraint firstItem="kPb-4a-j29" firstAttribute="bottom" secondItem="TG5-Vj-iuN" secondAttribute="bottom" constant="50" id="JZc-Qr-SDf"/>
+                            <constraint firstItem="muy-DU-D7t" firstAttribute="top" secondItem="TG5-Vj-iuN" secondAttribute="bottom" constant="10" id="D79-PS-XDt"/>
+                            <constraint firstItem="kPb-4a-j29" firstAttribute="trailing" secondItem="muy-DU-D7t" secondAttribute="trailing" constant="30" id="NvJ-X7-pbB"/>
                             <constraint firstItem="kPb-4a-j29" firstAttribute="trailing" secondItem="rX1-lp-WZ6" secondAttribute="trailing" constant="30" id="aC5-dv-uu7"/>
-                            <constraint firstItem="NZ6-L4-dqb" firstAttribute="top" secondItem="rX1-lp-WZ6" secondAttribute="bottom" constant="30" id="dpq-zD-1n9"/>
+                            <constraint firstItem="kPb-4a-j29" firstAttribute="bottom" secondItem="muy-DU-D7t" secondAttribute="bottom" constant="50" id="b8V-bD-jL8"/>
                             <constraint firstItem="kPb-4a-j29" firstAttribute="trailing" secondItem="TG5-Vj-iuN" secondAttribute="trailing" constant="50" id="dsM-YN-c44"/>
                             <constraint firstItem="NZ6-L4-dqb" firstAttribute="leading" secondItem="kPb-4a-j29" secondAttribute="leading" id="fMt-Fe-5J1"/>
                             <constraint firstItem="TG5-Vj-iuN" firstAttribute="leading" secondItem="kPb-4a-j29" secondAttribute="leading" constant="50" id="jLS-qh-ItB"/>
                             <constraint firstItem="kPb-4a-j29" firstAttribute="trailing" secondItem="NZ6-L4-dqb" secondAttribute="trailing" id="pLO-6U-lKf"/>
                             <constraint firstItem="rX1-lp-WZ6" firstAttribute="leading" secondItem="kPb-4a-j29" secondAttribute="leading" constant="30" id="wPA-na-KaA"/>
+                            <constraint firstItem="muy-DU-D7t" firstAttribute="leading" secondItem="kPb-4a-j29" secondAttribute="leading" constant="30" id="wyc-yD-tgd"/>
+                            <constraint firstItem="kPb-4a-j29" firstAttribute="trailing" secondItem="SJU-sf-f4q" secondAttribute="trailing" constant="30" id="y40-7k-Tq6"/>
                         </constraints>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="descriptionTextField" destination="SJU-sf-f4q" id="9VZ-dD-ndK"/>
                         <outlet property="doneButton" destination="TG5-Vj-iuN" id="qzD-52-XMf"/>
+                        <outlet property="errorLabel" destination="muy-DU-D7t" id="wkg-QL-lSC"/>
                         <outlet property="workoutsTableView" destination="NZ6-L4-dqb" id="p1H-BZ-v2d"/>
                     </connections>
                 </viewController>
