@@ -330,16 +330,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adicione um treino" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rX1-lp-WZ6">
-                                <rect key="frame" x="30" y="30" width="354" height="29"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quais exercícios gostaria de adicionar?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rX1-lp-WZ6">
+                                <rect key="frame" x="30" y="30" width="354" height="57.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                 <color key="textColor" name="Cream"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="NZ6-L4-dqb">
-                                <rect key="frame" x="0.0" y="89" width="414" height="753"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <color key="sectionIndexBackgroundColor" name="Charcoal"/>
+                                <rect key="frame" x="0.0" y="117.5" width="414" height="594.5"/>
+                                <color key="backgroundColor" name="Charcoal"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="WorkoutCell" id="Hwa-Cr-XA7" customClass="CustomCell" customModule="GymApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="74.5"/>
@@ -391,24 +390,42 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TG5-Vj-iuN" customClass="MDCButton">
+                                <rect key="frame" x="50" y="742" width="314" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Cxi-Dt-yOO"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Done"/>
+                                <connections>
+                                    <action selector="doneButtonPressed:" destination="SlS-rk-5qT" eventType="touchUpInside" id="I6I-JV-1MT"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="kPb-4a-j29"/>
                         <color key="backgroundColor" name="Charcoal"/>
                         <constraints>
                             <constraint firstItem="rX1-lp-WZ6" firstAttribute="top" secondItem="kPb-4a-j29" secondAttribute="top" constant="30" id="30k-VK-DwP"/>
+                            <constraint firstItem="TG5-Vj-iuN" firstAttribute="top" secondItem="NZ6-L4-dqb" secondAttribute="bottom" constant="30" id="CdO-pD-7hR"/>
+                            <constraint firstItem="kPb-4a-j29" firstAttribute="bottom" secondItem="TG5-Vj-iuN" secondAttribute="bottom" constant="50" id="JZc-Qr-SDf"/>
                             <constraint firstItem="kPb-4a-j29" firstAttribute="trailing" secondItem="rX1-lp-WZ6" secondAttribute="trailing" constant="30" id="aC5-dv-uu7"/>
                             <constraint firstItem="NZ6-L4-dqb" firstAttribute="top" secondItem="rX1-lp-WZ6" secondAttribute="bottom" constant="30" id="dpq-zD-1n9"/>
+                            <constraint firstItem="kPb-4a-j29" firstAttribute="trailing" secondItem="TG5-Vj-iuN" secondAttribute="trailing" constant="50" id="dsM-YN-c44"/>
                             <constraint firstItem="NZ6-L4-dqb" firstAttribute="leading" secondItem="kPb-4a-j29" secondAttribute="leading" id="fMt-Fe-5J1"/>
-                            <constraint firstItem="kPb-4a-j29" firstAttribute="bottom" secondItem="NZ6-L4-dqb" secondAttribute="bottom" id="oX0-mU-c1n"/>
+                            <constraint firstItem="TG5-Vj-iuN" firstAttribute="leading" secondItem="kPb-4a-j29" secondAttribute="leading" constant="50" id="jLS-qh-ItB"/>
                             <constraint firstItem="kPb-4a-j29" firstAttribute="trailing" secondItem="NZ6-L4-dqb" secondAttribute="trailing" id="pLO-6U-lKf"/>
                             <constraint firstItem="rX1-lp-WZ6" firstAttribute="leading" secondItem="kPb-4a-j29" secondAttribute="leading" constant="30" id="wPA-na-KaA"/>
                         </constraints>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="doneButton" destination="TG5-Vj-iuN" id="qzD-52-XMf"/>
+                        <outlet property="workoutsTableView" destination="NZ6-L4-dqb" id="p1H-BZ-v2d"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q5V-B2-sCF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4304" y="33"/>
+            <point key="canvasLocation" x="4302.898550724638" y="32.8125"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Hey-ai-ZYm">

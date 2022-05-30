@@ -8,11 +8,11 @@
 import Foundation
 
 class Exercicio {
-    let nome: String
-    let imagem: URL
+    let nome: Int
+    let imagem: String
     let observacoes: String
     
-    init(nome: String, imagem: URL, observacoes: String){
+    init(nome: Int, imagem: String, observacoes: String){
         self.nome = nome
         self.imagem = imagem
         self.observacoes = observacoes
