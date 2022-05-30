@@ -45,8 +45,8 @@ class NewWorkoutViewController: UIViewController {
                                  placeholder: "Treino A",
                                  underlineColorNormal: UIColor.goldColor,
                                  underlineColorEditing: UIColor.tanColor,
-                                 backgroundColorNormal: UIColor.goldColor,
-                                 backgroundColorEditing: UIColor.tanColor)
+                                 backgroundColorNormal: UIColor.creamColor,
+                                 backgroundColorEditing: UIColor.goldColor)
     }
     
     func printError (_ message: String) {
@@ -74,6 +74,7 @@ class NewWorkoutViewController: UIViewController {
                     }
                 }
             }
+            NotificationCenter.default.post(name: NSNotification.Name("UpdateTableViewIdentifier"), object: nil)
             self.dismiss(animated: true)
         }
         
