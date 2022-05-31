@@ -18,9 +18,10 @@ class AddExerciseViewController: UIViewController {
     let db = Firestore.firestore()
     var currentWorkout = Treino()
     var currentExercises = [Exercicio]()
-    var allExercises = [Exercicio]()
     var missingExercises = [Exercicio]()
+    var updatedExercises = [Int]()
     var userDocumentId = ""
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,15 +29,34 @@ class AddExerciseViewController: UIViewController {
         
         exercisesTableView.dataSource = self
         exercisesTableView.delegate = self
+        exercisesTableView.allowsMultipleSelection = true
         
         customizeButton(button: doneButton,
                         bgColor: UIColor.tanColor,
-                        title: "Adicionar",
+                        title: "Concluído",
                         txtColor: UIColor.creamColor)
         
         getExercises()
         
+        for exercise in currentExercises {
+            updatedExercises.append(exercise.nome)
+        }
     }
+    
+    @IBAction func doneButtonPressed(_ sender: Any) {
+        db.collection("users").document(userDocumentId).collection("customWorkouts").whereField("nome", isEqualTo: currentWorkout.nome).getDocuments { snapshot, err in
+            if err != nil {
+                print(err!.localizedDescription)
+            } else if snapshot!.count > 1 {
+                print("Mais de um treino encontrado com este nome.")
+            } else {
+                let document = snapshot?.documents.first
+                self.db.collection("users").document(self.userDocumentId).collection("customWorkouts").document(document!.documentID).updateData(["exercicios" : self.updatedExercises])
+            }
+        }
+        dismiss(animated: true)
+    }
+    
 
 }
 
@@ -61,7 +81,7 @@ extension AddExerciseViewController: UITableViewDelegate, UITableViewDataSource 
                                                         observacoes: documentDescription))
                     }
                 }
-                self.allExercises = rawExercises.sorted { exerciseA, exerciseB in
+                self.missingExercises = rawExercises.sorted { exerciseA, exerciseB in
                     exerciseA.nome < exerciseB.nome
                 }
                 self.exercisesTableView.reloadData()
@@ -70,20 +90,31 @@ extension AddExerciseViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return allExercises.count
+        return missingExercises.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ExerciseCell", for: indexPath) as? CustomCell else { fatalError() }
         
-        cell.titleLabel.text = String(allExercises[indexPath.row].nome)
-        cell.descriptionLabel.text = allExercises[indexPath.row].observacoes
+        cell.titleLabel.text = String(missingExercises[indexPath.row].nome)
+        cell.descriptionLabel.text = missingExercises[indexPath.row].observacoes
         
         let iconView = UIImageView()
-        iconView.sd_setImage(with: allExercises[indexPath.row].imagem)
+        iconView.sd_setImage(with: missingExercises[indexPath.row].imagem)
         cell.icon.image = iconView.image
 
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        let exerciseName = missingExercises[indexPath.row].nome
+        let exerciseIndex = updatedExercises.firstIndex(of: exerciseName)!
+        updatedExercises.remove(at: exerciseIndex)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let exerciseName = missingExercises[indexPath.row].nome
+        updatedExercises.append(exerciseName)
     }
     
 }

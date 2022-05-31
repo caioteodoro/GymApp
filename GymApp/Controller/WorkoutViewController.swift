@@ -34,6 +34,8 @@ class WorkoutViewController: UIViewController {
         if segue.identifier == "AddExerciseVCSegue" {
             if let addExerciseVC = segue.destination as? AddExerciseViewController {
                 addExerciseVC.currentExercises = self.exercises
+                addExerciseVC.userDocumentId = self.userDocumentId
+                addExerciseVC.currentWorkout = self.currentWorkout
             }
         }
     }
@@ -48,14 +50,14 @@ class WorkoutViewController: UIViewController {
         workoutTitleLabel.text = currentWorkout.descricao
         
         customizeButton(button: addExerciseButton,
-                        bgColor: UIColor.creamColor,
+                        bgColor: UIColor.tanColor,
                         title: "Adicionar exercício",
-                        txtColor: UIColor.charcoalColor)
+                        txtColor: UIColor.creamColor)
         
         customizeButton(button: doneButton,
-                        bgColor: UIColor.creamColor,
+                        bgColor: UIColor.tanColor,
                         title: "Treino concluído",
-                        txtColor: UIColor.charcoalColor)
+                        txtColor: UIColor.creamColor)
         
         getExercises()
      
@@ -140,6 +142,29 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
         cell.icon.image = iconView.image
 
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            
+            exercises.remove(at: indexPath.row)
+            self.exercisesTableView.deleteRows(at: [indexPath], with: .fade)
+            
+            db.collection("users").document(userDocumentId).collection("customWorkouts").whereField("nome", isEqualTo: self.currentWorkout.nome).getDocuments { snapshot, err in
+                if err != nil {
+                    print(err!.localizedDescription)
+                } else if snapshot!.count > 1 {
+                    print("Mais de um treino encontrado.")
+                } else {
+                    let document = snapshot?.documents.first
+                    var updatedExercises = [Int]()
+                    for exercise in self.exercises {
+                        updatedExercises.append(exercise.nome)
+                    }
+                    self.db.collection("users").document(self.userDocumentId).collection("customWorkouts").document(document!.documentID).updateData(["exercicios" : updatedExercises])
+                }
+            }
+        }
     }
 
 }
