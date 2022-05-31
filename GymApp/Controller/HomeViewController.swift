@@ -6,10 +6,10 @@
 //
 
 import UIKit
+import SwiftUI
 import MaterialComponents
 import FirebaseAuth
 import Firebase
-import SwiftUI
 import FirebaseFirestoreSwift
 
 class HomeViewController: UIViewController {
